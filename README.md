@@ -1,4 +1,5 @@
 # PACAnalyzer
+#### By Bryan O'Malley (bo122081@hotmail.com)
 Perception-Action Cycle analysis plugin for SC2Reader
 
 This plugin is built based on the work of Mark Blair, Ph.D, 

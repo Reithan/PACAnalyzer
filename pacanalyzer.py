@@ -1,5 +1,5 @@
 """
-Author: Bryan O'Malley
+Author: Bryan O'Malley (bo122081@hotmail.com)
 Date Created: 2015/01/11
 Other Contributors:
 Date Modified: 2015/01/11
