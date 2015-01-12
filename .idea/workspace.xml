@@ -29,22 +29,10 @@
       <file leaf-file-name="pacanalyzer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pacanalyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8891304" vertical-offset="814" max-vertical-offset="1734">
-              <caret line="96" column="79" selection-start-line="96" selection-start-column="79" selection-end-line="96" selection-end-column="79" />
+            <state vertical-scroll-proportion="0.50108695" vertical-offset="933" max-vertical-offset="1921">
+              <caret line="82" column="64" selection-start-line="82" selection-start-column="64" selection-end-line="82" selection-end-column="64" />
               <folding>
                 <element signature="e#305#387#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="context.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../sc2reader/sc2reader/engine/plugins/context.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4811">
-              <caret line="34" column="156" selection-start-line="34" selection-start-column="156" selection-end-line="34" selection-end-column="156" />
-              <folding>
-                <element signature="e#51#133#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,6 +106,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sc2reader/sc2reader/objects.py" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -245,6 +234,9 @@
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4e06fcc5-2aac-4acb-a68b-47c9d0eb85a1" name="Default" comment="" />
@@ -256,7 +248,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -783,7 +775,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../sc2reader/sc2reader/engine/plugins/context.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4811">
+        <state vertical-scroll-proportion="0.62826085" vertical-offset="0" max-vertical-offset="4811">
           <caret line="34" column="156" selection-start-line="34" selection-start-column="156" selection-end-line="34" selection-end-column="156" />
           <folding>
             <element signature="e#51#133#0" expanded="true" />
@@ -793,8 +785,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pacanalyzer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8891304" vertical-offset="814" max-vertical-offset="1734">
-          <caret line="96" column="79" selection-start-line="96" selection-start-column="79" selection-end-line="96" selection-end-column="79" />
+        <state vertical-scroll-proportion="0.50108695" vertical-offset="933" max-vertical-offset="1921">
+          <caret line="82" column="64" selection-start-line="82" selection-start-column="64" selection-end-line="82" selection-end-column="64" />
           <folding>
             <element signature="e#305#387#0" expanded="true" />
           </folding>

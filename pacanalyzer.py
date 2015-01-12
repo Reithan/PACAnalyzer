@@ -15,9 +15,17 @@ from collections import defaultdict
 
 class PAC:
     def __init__(self, frame, x, y):
-        min, max = [x, y], [x, y]
-        cameras = [[frame, x, y]]
-        actions = []
+        self.min, self.max = [x, y], [x, y]
+        self.cameras = [[frame, x, y]]
+        self.actions = []
+
+class PACInfo:
+    def __init__(self, disp, dur):
+        self.DispThreshold = disp
+        self.DurThreshold = dur
+
+class PACStats:
+    ppm, pal, app, gap = None, None, None, None
 
 class PACAnalyzer(object):
     name = 'PACAnalyzer'
@@ -29,14 +37,13 @@ class PACAnalyzer(object):
             replay.load_map()
         """
         # Settings for fixation
-        replay.PACInfo.DispThreshold = 6
-        replay.PACInfo.DurThreshold = 0.2
+        replay.PACInfo = PACInfo(6, 0.2)
         for human in replay.humans:
             human.PACList = None
 
     def handleCameraEvent(self, event, replay):
         if not event.player.PACList:
-            event.player.PACList = PAC(event.frame, event.x, event.y)
+            event.player.PACList = [PAC(event.frame, event.x, event.y)]
         else:
             newMin = [min(x) for x in zip(event.player.PACList[-1].min, [event.x, event.y])]
             newMax = [max(x) for x in zip(event.player.PACList[-1].max, [event.x, event.y])]
@@ -50,7 +57,7 @@ class PACAnalyzer(object):
                 # if the PAC is empty, or hasn't hit minimum time yet, shift selection window
                 if len(event.player.PACList[-1].actions) == 0 or \
                         (event.player.PACList[-1].cameras[-1][0] - event.player.PACList[-1].cameras[0][0] <
-                         replay.PACInfo.DurThreshold * 16): # 16 fps
+                         replay.PACInfo.DurThreshold * 16):  # 16 fps
                     event.player.PACList[-1].cameras.append([event.frame, event.x, event.y])
                     while diff > replay.PACInfo.DispThreshold:
                         del event.player.PACList[-1].cameras[0]
@@ -58,25 +65,25 @@ class PACAnalyzer(object):
                         event.player.PACList[-1].max = [max(x) for x in zip(*event.player.PACList[-1].cameras)][1:]
                         diff = sum(
                             [abs(x[0] - x[1]) for x in zip(event.player.PACList[-1].min, event.player.PACList[-1].max)])
-                        for x in range(0,len(event.player.PACList[-1].actions)):
-                            if event.player.PACList[-1].actions[x] < event.player.PACList[-1].cameras[0][0]:
-                                del event.player.PACList[-1].actions[x]
-                            else:
+                        for x in range(0,len(event.player.PACList[-1].actions) + 1):
+                            if x == len(event.player.PACList[-1].actions) or\
+                                            event.player.PACList[-1].actions[x] >= event.player.PACList[-1].cameras[0][0]:
+                                del event.player.PACList[-1].actions[0:x]
                                 break
                 else: # otherwise, simply add a new PAC
                     event.player.PACList.append(PAC(event.frame, event.x, event.y))
 
 
     def handleControlGroupEvent(self, event, replay):
-        if not event.player.PACList:
+        if event.player.PACList:
             event.player.PACList[-1].actions.append(event.frame)
 
     def handleSelectionEvent(self, event, replay):
-        if not event.player.PACList:
+        if event.player.PACList:
             event.player.PACList[-1].actions.append(event.frame)
 
     def handleCommandEvent(self, event, replay):
-        if not event.player.PACList:
+        if event.player.PACList:
             event.player.PACList[-1].actions.append(event.frame)
 
     """
@@ -86,12 +93,16 @@ class PACAnalyzer(object):
 
     def handleEndGame(self, event, replay):
         for human in replay.humans:
-            numPACs = len(human.PACList)
-            # PAC per Minute
-            human.PACStats.ppm = numPACs / (replay.frames / (16 * 60))  # 16fps, 60s/min
-            # PAC action latency
-            human.PACStats.pal = (sum(PAC.actions[0] - PAC.cameras[0][0]) for PAC in human.PACList) / numPACs
-            # Actions per PAC
-            human.PACStats.app = (sum(len(PAC.actions)) for PAC in human.PACList) / numPACs
-            # Gap between PAC
-            human.PACStats.gap = (sum(human.PACList[x + 1][0] - human.PACList[x][0]) for x in range(0,numPACs - 1)) / (numPACs - 1)
+            if human.PACList:
+                numPACs = len(human.PACList)
+                human.PACStats = PACStats()
+                # PAC per Minute
+                human.PACStats.ppm = numPACs / (replay.frames / (16 * 60))  # 16fps, 60s/min
+                # PAC action latency
+                human.PACStats.pal = sum(iPAC.actions[0] - iPAC.cameras[0][0] for iPAC in human.PACList) /\
+                    (numPACs * 16)
+                # Actions per PAC
+                human.PACStats.app = sum(len(iPAC.actions) for iPAC in human.PACList) / numPACs
+                # Gap between PAC
+                human.PACStats.gap = sum(human.PACList[x + 1].cameras[0][0] - human.PACList[x].cameras[-1][0]
+                                         for x in range(0, numPACs - 1)) / ((numPACs - 1) * 16)
