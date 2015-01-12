@@ -104,5 +104,5 @@ class PACAnalyzer(object):
                 # Actions per PAC
                 human.PACStats.app = sum(len(iPAC.actions) for iPAC in human.PACList) / numPACs
                 # Gap between PAC
-                human.PACStats.gap = sum(human.PACList[x + 1].cameras[0][0] - human.PACList[x].cameras[-1][0]
+                human.PACStats.gap = sum(human.PACList[x + 1].cameras[0][0] - human.PACList[x].actions[-1]
                                          for x in range(0, numPACs - 1)) / ((numPACs - 1) * 16)
