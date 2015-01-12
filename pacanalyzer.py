@@ -2,7 +2,7 @@
 Author: Bryan O'Malley (bo122081@hotmail.com)
 Date Created: 2015/01/11
 Other Contributors:
-Date Modified: 2015/01/11
+Date Modified: 2015/01/12
 Purpose: Plugin for SC2Reader
     (https://github.com/GraylinKim/sc2reader)
     to Generate PAC stats from SC2 Replay based
@@ -88,11 +88,6 @@ class PACAnalyzer(object):
     def handleCommandEvent(self, event, replay):
         if event.player.PACList:
             event.player.PACList[-1].actions.append(event.frame)
-
-    """
-    def handlePlayerLeaveEvent(self, event, replay):
-        event.player.seconds_played = event.second
-    """
 
     def handleEndGame(self, event, replay):
         for human in replay.humans:
