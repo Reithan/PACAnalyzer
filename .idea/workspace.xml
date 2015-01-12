@@ -29,8 +29,8 @@
       <file leaf-file-name="pacanalyzer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pacanalyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18804348" vertical-offset="558" max-vertical-offset="1751">
-              <caret line="43" column="25" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.8891304" vertical-offset="814" max-vertical-offset="1734">
+              <caret line="96" column="79" selection-start-line="96" selection-start-column="79" selection-end-line="96" selection-end-column="79" />
               <folding>
                 <element signature="e#305#387#0" expanded="true" />
               </folding>
@@ -793,8 +793,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pacanalyzer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18804348" vertical-offset="558" max-vertical-offset="1751">
-          <caret line="43" column="25" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.8891304" vertical-offset="814" max-vertical-offset="1734">
+          <caret line="96" column="79" selection-start-line="96" selection-start-column="79" selection-end-line="96" selection-end-column="79" />
           <folding>
             <element signature="e#305#387#0" expanded="true" />
           </folding>

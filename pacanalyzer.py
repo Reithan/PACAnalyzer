@@ -19,13 +19,6 @@ class PAC:
         cameras = [[frame, x, y]]
         actions = []
 
-    """
-    tuplelist = [[5, 1, 2], [5, 2, 1], [5, 2, 2]]
-    tuplesum = [sum(x) for x in zip(*tuplelist)]
-    print(tuplesum[1:])
-    """
-
-
 class PACAnalyzer(object):
     name = 'PACAnalyzer'
 
@@ -75,23 +68,30 @@ class PACAnalyzer(object):
 
 
     def handleControlGroupEvent(self, event, replay):
-        event.player.aps[event.second] += 1
-        event.player.apm[int(event.second / 60)] += 1
+        if not event.player.PACList:
+            event.player.PACList[-1].actions.append(event.frame)
 
     def handleSelectionEvent(self, event, replay):
-        event.player.aps[event.second] += 1
-        event.player.apm[int(event.second / 60)] += 1
+        if not event.player.PACList:
+            event.player.PACList[-1].actions.append(event.frame)
 
     def handleCommandEvent(self, event, replay):
-        event.player.aps[event.second] += 1
-        event.player.apm[int(event.second / 60)] += 1
+        if not event.player.PACList:
+            event.player.PACList[-1].actions.append(event.frame)
 
+    """
     def handlePlayerLeaveEvent(self, event, replay):
         event.player.seconds_played = event.second
+    """
 
     def handleEndGame(self, event, replay):
         for human in replay.humans:
-            if len(human.apm.keys()) > 0:
-                human.avg_apm = sum(human.aps.values()) / float(human.seconds_played) * 60
-            else:
-                human.avg_apm = 0
+            numPACs = len(human.PACList)
+            # PAC per Minute
+            human.PACStats.ppm = numPACs / (replay.frames / (16 * 60))  # 16fps, 60s/min
+            # PAC action latency
+            human.PACStats.pal = (sum(PAC.actions[0] - PAC.cameras[0][0]) for PAC in human.PACList) / numPACs
+            # Actions per PAC
+            human.PACStats.app = (sum(len(PAC.actions)) for PAC in human.PACList) / numPACs
+            # Gap between PAC
+            human.PACStats.gap = (sum(human.PACList[x + 1][0] - human.PACList[x][0]) for x in range(0,numPACs - 1)) / (numPACs - 1)
