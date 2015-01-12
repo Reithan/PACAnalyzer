@@ -1,8 +1,9 @@
 # PACAnalyzer
 Perception-Action Cycle analysis plugin for SC2Reader
 
-This plugin is built based on the work of Mark Blair, Ph.D, et.al on the SkillCraft project. You can find their blog at:
-http://skillcraft.ca/category/blog/
+This plugin is built based on the work of Mark Blair, Ph.D, 
+and the Simon Fraser University Cognitive Science Lab (http://cslab-sfu.ca) on the SkillCraft project. You can find their project website at:
+http://skillcraft.ca
 
 This plugin adds a list of PACs to each human player in a replay.
 

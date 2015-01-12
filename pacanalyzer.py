@@ -4,8 +4,9 @@ Date Created: 2015/01/11
 Other Contributors:
 Date Modified: 2015/01/11
 Purpose: Generate PAC stats from SC2 Replay based
-    on SkillCraft project research done by Mark Blair, Ph.D., et. al.
-Skillcraft Source URL: http://skillcraft.ca/category/blog/
+    on SkillCraft project research done by Mark Blair, Ph.D. and the Simon Fraser University Cognitive Science Lab
+Simon Fraser University Cognitive Science Lab URL: http://cslab-sfu.ca/
+Skillcraft Source URL: http://skillcraft.ca/
 """
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals, division
