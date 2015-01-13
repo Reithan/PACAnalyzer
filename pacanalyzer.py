@@ -92,6 +92,8 @@ class PACAnalyzer(object):
     def handleEndGame(self, event, replay):
         for human in replay.humans:
             if human.PACList:
+                if len(human.PACList[-1].actions) == 0:
+                    del human.PACList[-1]
                 numPACs = len(human.PACList)
                 human.PACStats = PACStats()
                 # PAC per Minute
