@@ -33,32 +33,35 @@ def printReplay(filepath, analysis, arguments):
         for team in replay.teams:
             if arguments.displayreplays:
                 print("      Team {0}".format(team.number))
-            for player in team.players[0:]:
-                if arguments.displayreplays:
-                    print("      \t{0} ({1})".format(player.name, player.pick_race[0]))
-                    print("      \t\tPPM: {0:>6.2f}".format(player.PACStats.ppm))
-                    print("      \t\tPAL: {0:>6.2f}".format(player.PACStats.pal))
-                    print("      \t\tAPP: {0:>6.2f}".format(player.PACStats.app))
-                    print("      \t\tGAP: {0:>6.2f}".format(player.PACStats.gap))
-                if player.toon_id in analysis:
-                    analysis[player.toon_id].ppm = (analysis[player.toon_id].count * analysis[player.toon_id].ppm +
-                                                    player.PACStats.ppm) / (analysis[player.toon_id].count + 1)
-                    analysis[player.toon_id].pal = (analysis[player.toon_id].count * analysis[player.toon_id].pal +
-                                                    player.PACStats.pal) / (analysis[player.toon_id].count + 1)
-                    analysis[player.toon_id].app = (analysis[player.toon_id].count * analysis[player.toon_id].app +
-                                                    player.PACStats.app) / (analysis[player.toon_id].count + 1)
-                    analysis[player.toon_id].gap = (analysis[player.toon_id].count * analysis[player.toon_id].gap +
-                                                    player.PACStats.gap) / (analysis[player.toon_id].count + 1)
-                    analysis[player.toon_id].count += 1
+            for player in team.players:
+                if player.is_human:
+                    if arguments.displayreplays:
+                        print("      \t{0} ({1})".format(player.name, player.pick_race[0]))
+                        print("      \t\tPPM: {0:>6.2f}".format(player.PACStats.ppm))
+                        print("      \t\tPAL: {0:>6.2f}".format(player.PACStats.pal))
+                        print("      \t\tAPP: {0:>6.2f}".format(player.PACStats.app))
+                        print("      \t\tGAP: {0:>6.2f}".format(player.PACStats.gap))
+                    if player.toon_id in analysis:
+                        analysis[player.toon_id].ppm = (analysis[player.toon_id].count * analysis[player.toon_id].ppm +
+                                                        player.PACStats.ppm) / (analysis[player.toon_id].count + 1)
+                        analysis[player.toon_id].pal = (analysis[player.toon_id].count * analysis[player.toon_id].pal +
+                                                        player.PACStats.pal) / (analysis[player.toon_id].count + 1)
+                        analysis[player.toon_id].app = (analysis[player.toon_id].count * analysis[player.toon_id].app +
+                                                        player.PACStats.app) / (analysis[player.toon_id].count + 1)
+                        analysis[player.toon_id].gap = (analysis[player.toon_id].count * analysis[player.toon_id].gap +
+                                                        player.PACStats.gap) / (analysis[player.toon_id].count + 1)
+                        analysis[player.toon_id].count += 1
+                    else:
+                        analysis[player.toon_id] = PACStats()
+                        analysis[player.toon_id].name = player.name
+                        analysis[player.toon_id].count = 1
+                        analysis[player.toon_id].ppm = player.PACStats.ppm
+                        analysis[player.toon_id].pal = player.PACStats.pal
+                        analysis[player.toon_id].app = player.PACStats.app
+                        analysis[player.toon_id].gap = player.PACStats.gap
                 else:
-                    analysis[player.toon_id] = PACStats()
-                    analysis[player.toon_id].name = player.name
-                    analysis[player.toon_id].count = 1
-                    analysis[player.toon_id].ppm = player.PACStats.ppm
-                    analysis[player.toon_id].pal = player.PACStats.pal
-                    analysis[player.toon_id].app = player.PACStats.app
-                    analysis[player.toon_id].gap = player.PACStats.gap
-
+                    if arguments.displayreplays:
+                        print("      \t{0} ({1})".format(player.name, player.pick_race[0]))
         print
     except ReadError as e:
         raise
